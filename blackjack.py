@@ -1,6 +1,8 @@
 import random
 def dealing_cards(cards, number):
-    deck = ["A", 2, 3, 4, 5, 6, 7, 8, 9, 10, 'J', 'Q', "K"]*4
+    deck = []
+    if len(deck) == 0:
+        deck = ["A", 2, 3, 4, 5, 6, 7, 8, 9, 10, 'J', 'Q', "K"]*4
     for i in range(number):
         cards.append(random.choice(deck))
     return cards
@@ -238,23 +240,24 @@ if __name__ == "__main__":
         if player_sum_2 > 21:
             player_sum_2 = 0
 
-        if number == 0 and player_sum_2 == 0: # player busts
+        # player busts
+        if number == 0 and player_sum_2 == 0: 
             if d_number == 2 or d_number == 1:
                 print('Bust! You lose...')
 
             elif d_number == 0:
                 print('You both lose...')
 
-    
-        elif number == 1 and player_sum_2 == 0: # player gets blackjack
+        # player gets blackjack
+        elif number == 1 and player_sum_2 == 0: 
             if d_number == 1:
                 print("Push! It's a tie!")
 
             elif d_number != 1:
                 print('Blackjack!!! You win!')
 
-
-        elif number == 2 and player_sum_2 == 0: # player stays
+        # player stays
+        elif number == 2 and player_sum_2 == 0: 
             if d_number == 0:
                 print('You win!')
 
@@ -269,16 +272,16 @@ if __name__ == "__main__":
                 elif player_sum == dealer_sum:
                     print("Push! It's a tie!")
 
-
-        elif number == 3: # split and busts twice
+        # split and busts twice
+        elif number == 3: 
             if d_number == 0 or d_number == 2:
                 print('You lost with both hands...')
 
             elif d_number == 1:
                 print('The dealer got blackjack. You lose...')
 
-        
-        elif number == 4: # split and stayed for both or 1st hand busts
+        # split and stayed for both or 1st hand busts
+        elif number == 4: 
             if d_number == 0:
                 print('You win!')
 
@@ -287,10 +290,9 @@ if __name__ == "__main__":
 
             elif d_number == 2:
 
-                # these if-statements makes it where if a hand is over 21/busts, its sum will go to 0
+                # these if-statements makes it where if the 1st hand is over 21/busts, its sum will go to 0
                 if player_sum > 21:
                     player_sum = 0
-
 
                 if player_sum > dealer_sum:
                     if player_sum_2 > dealer_sum:
@@ -300,7 +302,6 @@ if __name__ == "__main__":
                     elif player_sum_2 == dealer_sum:
                         print('Your 1st hand won!')
                 
-
                 elif player_sum < dealer_sum:
                     if player_sum_2 < dealer_sum:
                         print('You lost both hands...')

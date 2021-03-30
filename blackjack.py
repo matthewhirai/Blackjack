@@ -1,4 +1,5 @@
 import random
+
 def dealing_cards(cards, number):
     deck = []
     if len(deck) == 0:
@@ -9,40 +10,39 @@ def dealing_cards(cards, number):
 
 #conversion of player's cards
 def convert(cards):
-    new_cards = cards.copy()
-    if new_cards[0] == 'A' and new_cards[1] == 'A':
-        t = 12
-        return t
+    tens = ['J', 'Q', 'K']
+    t = 0
+    if cards[0] == 'A' and cards[1] == 'A':
+        cards[0] = 11
+        cards[1] = 1
 
-    for i in range(len(new_cards)):
+    for i in range(len(cards)):
 
-        if new_cards[i] == 'J':
-            new_cards[i] = 10
-            i += 1
+        if cards[i] in tens:
+            cards[i] = (10)
 
-        elif new_cards[i] == 'Q':
-            new_cards[i] = 10
-            i += 1
+        elif cards[i] == 'A':
+            cards.pop(i)
+            cards_sum = convert(cards)
+            if cards_sum < 10:
+                cards.append(11)
 
-        elif new_cards[i] == 'K':
-            new_cards[i] = 10
-            i += 1
+            elif cards_sum >= 11:
+                cards.append(1)
+   
+            elif cards_sum == 10:
+                cards.append(11)
 
-        elif new_cards[i] == 'A':
-            new_cards.pop(i)
-            card_sum = convert(new_cards)
-            if card_sum < 10:
-                new_cards.append(11)
-                i += 1
-            elif card_sum >= 11:
-                new_cards.append(1)
-                i += 1     
-            elif card_sum == 10:
-                new_cards.append(11)
-                i += 1
 
-    t = sum(new_cards)
-    return t  
+    t = sum(cards)
+    return t
+
+#turns 1 and 11 to 'A' to show user
+def ace(cards):
+    for n, i in enumerate(cards):
+        if i == 1 or i == 11:
+            cards[n] = 'A'
+    return cards
 
 #split cards for player
 def split(cards):
@@ -75,7 +75,7 @@ def split(cards):
                     if response_2 == "hit":
                         cards_2 = dealing_cards(cards_2, 1)
                         card_sum_2 = convert(cards_2)
-                        print(f'My 2nd set of cards: {cards_2} = {card_sum_2}/n')
+                        print(f'My 2nd set of cards: {cards_2} = {card_sum_2}\n')
                         if card_sum_2 > 21:
                             card_sum_2 = convert(cards_2)
                             return bust_twice
@@ -125,8 +125,10 @@ def player_actions(player_sum, player_cards):
 
                 if response == "hit":
                     player_cards = dealing_cards(player_cards, 1)
+                    og_cards = player_cards.copy()
                     player_sum = convert(player_cards)
-                    print(f'My cards: {player_cards} = {player_sum}\n')
+                    og_cards = ace(og_cards)
+                    print(f'My cards: {og_cards} = {player_sum}\n')
                     if player_sum > 21:
                         player_sum = convert(player_cards)
                         return bust, player_cards_2
@@ -154,8 +156,10 @@ def player_actions(player_sum, player_cards):
 
                 if response == "hit":
                     player_cards = dealing_cards(player_cards, 1)
+                    og_cards = player_cards.copy()
                     player_sum = convert(player_cards)
-                    print(f'My cards: {player_cards} = {player_sum}\n')
+                    og_cards = ace(og_cards)
+                    print(f'My cards: {og_cards} = {player_sum}\n')
                     if player_sum > 21:
                         player_sum = convert(player_cards)
                         return bust, player_cards_2
@@ -178,36 +182,38 @@ def dealer_actions(dealer_sum, dealer_cards):
     
     if dealer_sum != 21:
 
-        for i in range(len(dealer_cards)):
+        # for i in range(len(dealer_cards)):
 
-            if dealer_cards[i] == 'A':
+        #     if dealer_cards[i] == 'A':
 
-                if dealer_sum <= 16:
-                    dealer_cards = dealing_cards(dealer_cards, 1)
-                    dealer_sum = convert(dealer_cards)
-                    print(f"Dealer's cards: {dealer_cards} = {dealer_sum}\n")
-                    if dealer_sum > 21:
-                        return bust
-                    elif dealer_sum >= 17:
-                        return stay
+        #         if dealer_sum <= 16:
+        #             dealer_cards = dealing_cards(dealer_cards, 1)
+        #             dealer_sum = convert(dealer_cards)
+        #             print(f"Dealer's cards: {dealer_cards} = {dealer_sum}\n")
+        #             if dealer_sum > 21:
+        #                 return bust
+        #             elif dealer_sum >= 17:
+        #                 return stay
 
-            elif dealer_cards[i] != 'A':
+        #     elif dealer_cards[i] != 'A':
 
-                while dealer_sum <= 16:
-                    dealer_cards = dealing_cards(dealer_cards, 1)
-                    dealer_sum = convert(dealer_cards)
-                    print(f"Dealer's cards: {dealer_cards} = {dealer_sum}\n")
-                    if dealer_sum > 21:
-                        return bust
-                    elif dealer_sum >= 17:
-                        return stay
+        while dealer_sum <= 16:
+            dealer_cards = dealing_cards(dealer_cards, 1)
+            og_cards = dealer_cards.copy()
+            dealer_sum = convert(dealer_cards)
+            og_cards = ace(og_cards)
+            print(f"Dealer's cards: {og_cards} = {dealer_sum}\n")
+            if dealer_sum > 21:
+                return bust
+            elif dealer_sum >= 17:
+                return stay
 
-                if dealer_sum > 21:
-                    return bust
+        if dealer_sum > 21:
+            return bust
 
-                elif dealer_sum >= 17 and dealer_sum <=21:
-                    print(f"Dealer's cards: {dealer_cards} = {dealer_sum}\n")
-                    return stay
+        elif dealer_sum >= 17 and dealer_sum <=21:
+            print(f"Dealer's cards: {dealer_cards} = {dealer_sum}\n")
+            return stay
 
     if dealer_sum == 21 and len(dealer_cards) == 2:
         return blackjack
@@ -215,28 +221,30 @@ def dealer_actions(dealer_sum, dealer_cards):
 if __name__ == "__main__":
     while True:
 
-        player_cards = []
-        dealer_cards = []
+        player= []
+        dealer = []
 
-        player_cards = dealing_cards(player_cards, 2)
-        new_player_cards = player_cards.copy() # need to separate the converted cards from the cards that the player sees
-        player_sum = convert(new_player_cards)
-        print(f'My cards: {player_cards}')
+        player = dealing_cards(player, 2)
+        visible = player.copy()
+        visible = ace(visible)
+        player_sum = convert(player)
+        print(f'My cards: {visible}')
 
-        dealer_cards = dealing_cards(dealer_cards, 2)
-        new_dealer_cards = dealer_cards.copy()
-        dealer_sum = convert(new_dealer_cards)
-        invisible = dealer_cards.copy() # need to make the last card of dealer's 'invisible' to the player
+        dealer= dealing_cards(dealer, 2)
+        invisible = dealer.copy() # need to make the last card of dealer's 'invisible' to the player
+        invisible = ace(invisible)
+        dealer_sum = convert(dealer)
         invisible.pop()
         invisible.append('*')
-        print(f"Dealer's cards: {invisible}")
+        print(f"Dealer's cards: {dealer}")
 
-        number, player_cards_2 = player_actions(player_sum, new_player_cards)
-        d_number = dealer_actions(dealer_sum, new_dealer_cards)
+        number, player_cards_2 = player_actions(player_sum, player)
+        d_number = dealer_actions(dealer_sum, dealer)
 
-        player_sum = convert(new_player_cards)
+        player_sum = convert(player)
         player_sum_2 = convert(player_cards_2)
-        dealer_sum = convert(new_dealer_cards)
+        dealer_sum = convert(dealer)
+        
         if player_sum_2 > 21:
             player_sum_2 = 0
 
@@ -290,7 +298,7 @@ if __name__ == "__main__":
 
             elif d_number == 2:
 
-                # these if-statements makes it where if the 1st hand is over 21/busts, its sum will go to 0
+                # these if-statements makes it where if the 1st hand busts, its sum will go to 0
                 if player_sum > 21:
                     player_sum = 0
 
@@ -308,7 +316,7 @@ if __name__ == "__main__":
                     elif player_sum_2 > dealer_sum:
                         print('Your 2nd hand won!')
                     elif player_sum_2 == dealer_sum:
-                        print('You lost your 1st hand, but tied for your 2nd hand.')
+                        print('Push for your 2nd hand, but your 1st hand lost...')
 
                 elif player_sum == dealer_sum:
                     if player_sum_2 == dealer_sum:
@@ -316,7 +324,7 @@ if __name__ == "__main__":
                     elif player_sum_2 > dealer_sum:
                         print('Push for your 1st hand, but your 2nd hand won!')
                     elif player_sum_2 < dealer_sum:
-                        print('Push for your 2nd hand, but your 1st hand lost...')
+                        print('Push for your 1st hand, but your 2nd hand lost...')
 
         # gives the user a choice of playing again or ending it
         while True:

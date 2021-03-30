@@ -33,7 +33,6 @@ def convert(cards):
             elif cards_sum == 10:
                 cards.append(11)
 
-
     t = sum(cards)
     return t
 
@@ -106,6 +105,14 @@ def split(cards):
                     card_sum_2 = convert(cards_2)
                     return stay, cards_2 
 
+#adds a card to hand
+def hit(cards):
+    cards = dealing_cards(cards, 1)
+    og_cards = cards.copy()
+    og_cards = ace(og_cards)
+    card_sum = convert(cards)
+    return cards, og_cards, card_sum
+
 # what the player does
 def player_actions(player_sum, player_cards):
     bust = 0
@@ -117,17 +124,14 @@ def player_actions(player_sum, player_cards):
 
     if player_sum != 21:
 
+        response = ''
         if player_cards[0] == player_cards[1]: # when both cards are the same, the option for split comes up
                 
-            response = ''
             while response != "stay":
                 response = str(input("Would you like to hit, stay, or split? Type 'hit', type 'stay', or type 'split'.\n"))
 
                 if response == "hit":
-                    player_cards = dealing_cards(player_cards, 1)
-                    og_cards = player_cards.copy()
-                    player_sum = convert(player_cards)
-                    og_cards = ace(og_cards)
+                    player_cards, og_cards, player_sum = hit(ace(player_cards))
                     print(f'My cards: {og_cards} = {player_sum}\n')
                     if player_sum > 21:
                         player_sum = convert(player_cards)
@@ -150,15 +154,11 @@ def player_actions(player_sum, player_cards):
                         return bust_twice, player_cards_2
 
         elif player_cards[0] != player_cards[1]:
-            response = ""
             while response != "stay":
                 response = str(input("Would you like to hit or stay? Type 'hit' or type 'stay'.\n"))
 
                 if response == "hit":
-                    player_cards = dealing_cards(player_cards, 1)
-                    og_cards = player_cards.copy()
-                    player_sum = convert(player_cards)
-                    og_cards = ace(og_cards)
+                    player_cards, og_cards, player_sum = hit(player_cards)
                     print(f'My cards: {og_cards} = {player_sum}\n')
                     if player_sum > 21:
                         player_sum = convert(player_cards)
@@ -182,36 +182,15 @@ def dealer_actions(dealer_sum, dealer_cards):
     
     if dealer_sum != 21:
 
-        # for i in range(len(dealer_cards)):
-
-        #     if dealer_cards[i] == 'A':
-
-        #         if dealer_sum <= 16:
-        #             dealer_cards = dealing_cards(dealer_cards, 1)
-        #             dealer_sum = convert(dealer_cards)
-        #             print(f"Dealer's cards: {dealer_cards} = {dealer_sum}\n")
-        #             if dealer_sum > 21:
-        #                 return bust
-        #             elif dealer_sum >= 17:
-        #                 return stay
-
-        #     elif dealer_cards[i] != 'A':
-
         while dealer_sum <= 16:
-            dealer_cards = dealing_cards(dealer_cards, 1)
-            og_cards = dealer_cards.copy()
-            dealer_sum = convert(dealer_cards)
-            og_cards = ace(og_cards)
+            dealer_cards, og_cards, dealer_sum = hit(ace(dealer_cards))
             print(f"Dealer's cards: {og_cards} = {dealer_sum}\n")
             if dealer_sum > 21:
                 return bust
             elif dealer_sum >= 17:
                 return stay
 
-        if dealer_sum > 21:
-            return bust
-
-        elif dealer_sum >= 17 and dealer_sum <=21:
+        if dealer_sum >= 17 and dealer_sum <=21:
             print(f"Dealer's cards: {dealer_cards} = {dealer_sum}\n")
             return stay
 
@@ -228,7 +207,7 @@ if __name__ == "__main__":
         visible = player.copy()
         visible = ace(visible)
         player_sum = convert(player)
-        print(f'My cards: {visible}')
+        print(f'\nMy cards: {visible}')
 
         dealer= dealing_cards(dealer, 2)
         invisible = dealer.copy() # need to make the last card of dealer's 'invisible' to the player

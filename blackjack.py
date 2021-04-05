@@ -215,7 +215,7 @@ if __name__ == "__main__":
         dealer_sum = convert(dealer)
         invisible.pop()
         invisible.append('*')
-        print(f"Dealer's cards: {dealer}")
+        print(f"Dealer's cards: {invisible}")
 
         number, player_cards_2 = player_actions(player_sum, player)
         d_number = dealer_actions(dealer_sum, dealer)

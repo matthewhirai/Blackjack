@@ -284,9 +284,7 @@ if __name__ == "__main__":
                 if player_sum > dealer_sum:
                     if player_sum_2 > dealer_sum:
                         print('Both of your hands won!')
-                    elif player_sum_2 < dealer_sum:
-                        print('Your 1st hand won!')
-                    elif player_sum_2 == dealer_sum:
+                    elif player_sum_2 < dealer_sum or player_sum_2 == dealer_sum:
                         print('Your 1st hand won!')
                 
                 elif player_sum < dealer_sum:

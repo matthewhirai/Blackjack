@@ -8,19 +8,20 @@ if __name__ == "__main__":
         player = Player()
         dealer = Dealer()
         c.dealing_cards(player.cards, 2)
+        player.sum = c.convert(player.cards)
         visible = player.cards.copy()
         visible = c.ace(visible)
-        player_sum = c.convert(player.cards)
-        print(f'\nMy cards: {visible} = {player_sum}')
+        print(f'\nMy cards: {visible} = {player.sum}')
 
         c.dealing_cards(dealer.cards, 2)
         # need to make the last card of dealer's 'invisible' to the player
-        invisible = dealer.cards.copy()
+        invisible = dealer.cards[:]
         invisible = c.ace(invisible)
-        dealer_sum = c.convert(dealer.cards)
+
+        dealer.sum = c.convert(dealer.cards)
         invisible.pop()
         invisible.append('*')
-        print(f"Dealer's cards: {dealer.cards}")
+        print(f"Dealer's cards: {dealer.cards} {dealer.sum}")
 
         # number, player_cards_2 = player_actions(player_sum, player)
         # d_number = dealer_actions(dealer_sum, dealer)

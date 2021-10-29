@@ -1,11 +1,16 @@
+from cards import Cards as c
+
+
 class Player:
     def __init__(self):
         self.cards = []
+        self.sum = 0
 
     def append(self, n):
         self.cards.append(n)
+        self.sum = c.convert(self.cards)
 
-    # what the player does
+    # # what the player does
 
     # def player_actions(self, player_sum, player_cards):
     #     bust = 0

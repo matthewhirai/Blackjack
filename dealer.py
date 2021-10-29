@@ -7,19 +7,18 @@ class Dealer:
         if self.sum != 21:
 
             while self.sum <= 16:
-                c.hit(self.cards)
+                c.dealing_cards(self.cards, 1)
                 self.sum = c.convert(self.cards)
                 visible = self.cards.copy()
                 visible = c.ace(visible)
-                print(f"Dealer's cards: {visible} = {self.sum}\n")
+                print(f"Dealer's cards: {visible} = {self.sum}")
                 if self.sum > 21:
                     return "bust"
                 elif self.sum >= 17:
                     return "stay"
 
             if self.sum >= 17 and self.sum <= 21:
-                print(
-                    f"Dealer's cards: {self.cards} = {self.sum}\n")
+                print(f"Dealer's cards: {self.cards} = {self.sum}")
                 return "stay"
 
         if self.sum == 21 and len(self.cards) == 2:

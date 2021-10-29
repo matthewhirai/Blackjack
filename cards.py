@@ -24,30 +24,31 @@ class Cards:
 
     # conversion of cards
     def convert(self, cards):
+        conversion = cards.copy()
         tens = ['J', 'Q', 'K']
         t = 0
-        if cards[0] == 'A' and cards[1] == 'A':
-            cards[0] = 11
-            cards[1] = 1
+        if conversion[0] == 'A' and conversion[1] == 'A':
+            conversion[0] = 11
+            conversion[1] = 1
 
-        for i in range(len(cards)):
+        for i in range(len(conversion)):
 
-            if cards[i] in tens:
-                cards[i] = 10
+            if conversion[i] in tens:
+                conversion[i] = 10
 
-            elif cards[i] == 'A':
-                cards.pop(i)
-                cards_sum = self.convert(cards)
+            elif conversion[i] == 'A':
+                conversion.pop(i)
+                cards_sum = self.convert(conversion)
                 if cards_sum < 10:
-                    cards.append(11)
+                    conversion.append(11)
 
                 elif cards_sum >= 11:
-                    cards.append(1)
+                    conversion.append(1)
 
                 elif cards_sum == 10:
-                    cards.append(11)
+                    conversion.append(11)
 
-        t = sum(cards)
+        t = sum(conversion)
         return t
 
     # turns 1 and 11 to 'A' to show user

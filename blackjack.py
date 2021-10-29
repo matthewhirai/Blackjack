@@ -24,7 +24,7 @@ if __name__ == "__main__":
         print(f"Dealer's cards: {dealer.cards} {dealer.sum}")
 
         player.actions(c)
-        # d_number = dealer_actions(dealer_sum, dealer)
+        dealer.actions(c)
 
         # player_sum = convert(player)
         # player_sum_2 = convert(player_cards_2)

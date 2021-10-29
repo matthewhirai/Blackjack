@@ -1,6 +1,3 @@
-from cards import Cards
-
-
 class Player:
     def __init__(self):
         self.cards = []
@@ -11,7 +8,7 @@ class Player:
 
     # # what the player does
 
-    def actions(self, c: Cards):
+    def actions(self, c):
         if self.sum != 21:
 
             response = ''

@@ -22,7 +22,7 @@ class Cards:
 
             cards.append(self.deck.pop(0))
 
-    # conversion of player's cards
+    # conversion of cards
     def convert(self, cards):
         tens = ['J', 'Q', 'K']
         t = 0
@@ -56,11 +56,3 @@ class Cards:
             if i == 1 or i == 11:
                 cards[n] = 'A'
         return cards
-
-    # adds a card to hand
-    def hit(self, cards):
-        cards = self.dealing_cards(cards, 1)
-        og_cards = cards.copy()
-        og_cards = self.ace(og_cards)
-        card_sum = self.convert(cards)
-        return cards, og_cards, card_sum

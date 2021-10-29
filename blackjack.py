@@ -23,7 +23,7 @@ if __name__ == "__main__":
         invisible.append('*')
         print(f"Dealer's cards: {dealer.cards} {dealer.sum}")
 
-        # number, player_cards_2 = player_actions(player_sum, player)
+        player.actions(c)
         # d_number = dealer_actions(dealer_sum, dealer)
 
         # player_sum = convert(player)

@@ -22,7 +22,6 @@ class Cards:
                     self.deck[randIndex] = temp
 
             cards.append(self.deck.pop(0))
-        return cards
 
     # conversion of player's cards
     def convert(self, cards):

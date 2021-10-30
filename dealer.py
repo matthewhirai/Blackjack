@@ -16,7 +16,8 @@ class Dealer:
                 visible = c.ace(visible)
                 print(f"Dealer's cards: {visible} = {self.sum}")
                 if self.sum > 21:
-                    return "bust"
+                    self.sum = 0
+                    return "stay"
                 elif self.sum >= 17:
                     return "stay"
 

@@ -28,7 +28,11 @@ class Player:
                         visible = c.ace(visible)
                         print(f'My cards: {visible} = {self.sum}')
 
-                        if self.sum > 21 or self.sum == 21:
+                        if self.sum > 21:
+                            # if hand busts, sum is set to 0
+                            self.sum = 0
+                            response = "stay"
+                        elif self.sum == 21:
                             response = "stay"
 
                     elif response == 'split':
@@ -46,7 +50,10 @@ class Player:
                     visible = c.ace(visible)
                     print(f'My cards: {visible} = {self.sum}')
 
-                    if self.sum > 21 or self.sum == 21:
+                    if self.sum > 21:
+                        self.sum = 0
+                        response = "stay"
+                    elif self.sum == 21:
                         response = "stay"
 
     # split cards for player
@@ -71,6 +78,7 @@ class Player:
 
                 elif self.sum > 21:
                     print('Your 1st hand busted...\n')
+                    self.sum = 0
                     self.hand_2nd(c)
                     response = "stay"
 
@@ -91,6 +99,7 @@ class Player:
                 self.sum2 = c.convert(self.cards2)
                 print(f'My 2nd set of cards: {self.cards2} = {self.sum2}\n')
                 if self.sum2 > 21:
+                    self.sum = 0
                     response_2 = "stay"
                 elif self.sum2 == 21:
                     response_2 = "stay"

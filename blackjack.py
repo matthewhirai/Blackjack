@@ -29,77 +29,46 @@ if __name__ == "__main__":
         # player gets blackjack
         if player_condition == "blackjack":
             if dealer_condition == "blackjack":
-                print('Tie!!!')
+                print('Tie...')
             else:
-                print('You win!!!')
+                print('Blackjack!!! You win!!!')
 
         else:
             # no split
-            if player.sum2 == 0:
+            if 0 not in player.cards2:
+                if player.sum > dealer.sum:
+                    print("You win!!!")
+                elif player.sum < dealer.sum:
+                    print("You lose...")
+                elif player.sum == dealer.sum:
+                    print("Push! It's a tie!")
 
             else:
+                if player.sum > dealer.sum:
+                    if player.sum2 > dealer.sum:
+                        print("You win both hands!!!")
+                    else:
+                        print("Your 1st hand won!!!")
 
-                # # player stays
-                # elif number == 2 and player_sum_2 == 0:
-                #     if d_number == 0:
-                #         print('You win!')
+                elif player.sum < dealer.sum:
+                    if player.sum2 < dealer.sum:
+                        print("You lost both hands...")
 
-                #     elif d_number == 1:
-                #         print('The dealer got blackjack. You lose...')
+                    elif player.sum2 > dealer.sum:
+                        print("Your 2nd hand won!!!")
 
-                #     elif d_number == 2:
-                #         if player_sum > dealer_sum:
-                #             print('You win!')
-                #         elif player_sum < dealer_sum:
-                #             print('You lose...')
-                #         elif player_sum == dealer_sum:
-                #             print("Push! It's a tie!")
+                    elif player.sum2 == dealer.sum:
+                        print("You lost your 1st hand...")
 
-                # # split and busts twice
-                # elif number == 3:
-                #     if d_number == 0 or d_number == 2:
-                #         print('You lost with both hands...')
+                elif player.sum == dealer.sum:
+                    if player.sum2 == dealer.sum:
+                        print("Push! It's a tie for both hands!")
+                    elif player.sum2 < dealer.sum:
+                        print("You lost your 2nd hand...")
+                    elif player.sum2 > dealer.sum:
+                        print("Your 2nd hand won!!!")
 
-                #     elif d_number == 1:
-                #         print('The dealer got blackjack. You lose...')
-
-                # # split and stayed for both or 1st hand busts
-                # elif number == 4:
-                #     if d_number == 0:
-                #         print('You win!')
-
-                #     elif d_number == 1:
-                #         print('The dealer got blackjack. You lose...')
-
-                #     elif d_number == 2:
-
-                #         # these if-statements makes it where if the 1st hand busts, its sum will go to 0
-                #         if player_sum > 21:
-                #             player_sum = 0
-
-                #         if player_sum > dealer_sum:
-                #             if player_sum_2 > dealer_sum:
-                #                 print('Both of your hands won!')
-                #             elif player_sum_2 < dealer_sum or player_sum_2 == dealer_sum:
-                #                 print('Your 1st hand won!')
-
-                #         elif player_sum < dealer_sum:
-                #             if player_sum_2 < dealer_sum:
-                #                 print('You lost both hands...')
-                #             elif player_sum_2 > dealer_sum:
-                #                 print('Your 2nd hand won!')
-                #             elif player_sum_2 == dealer_sum:
-                #                 print('Push for your 2nd hand, but your 1st hand lost...')
-
-                #         elif player_sum == dealer_sum:
-                #             if player_sum_2 == dealer_sum:
-                #                 print("Push! Both of your hands tied with the dealer's!")
-                #             elif player_sum_2 > dealer_sum:
-                #                 print('Push for your 1st hand, but your 2nd hand won!')
-                #             elif player_sum_2 < dealer_sum:
-                #                 print('Push for your 1st hand, but your 2nd hand lost...')
-
-                # gives the user a choice of playing again or ending it
+        # gives the user a choice of playing again or ending it
         while True:
             answer = input('Play again? (y/n): ')
             if answer in ('y', 'n'):

@@ -5,6 +5,7 @@ class Dealer:
 
     def actions(self, c):
         if self.sum == 21 and len(self.cards) == 2:
+            print(f"Dealer's cards: {self.cards} = {self.sum}")
             return "blackjack"
 
         elif self.sum != 21:

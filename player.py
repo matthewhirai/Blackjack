@@ -10,8 +10,10 @@ class Player:
     # # what the player does
 
     def actions(self, c):
-        if self.sum != 21:
+        if self.sum == 21 and len(self.cards) == 2:
+            return "blackjack"
 
+        elif self.sum != 21:
             response = ''
             # when both cards are the same, the option for split comes up
             if self.cards[0] == self.cards[1] and self.split_count != 1:
@@ -26,67 +28,26 @@ class Player:
                         visible = c.ace(visible)
                         print(f'My cards: {visible} = {self.sum}')
 
-                        if self.sum > 21:
-                            return "bust"
-                        elif self.sum == 21:
-                            return "stay"
-
-                    elif response == "stay":
-                        self.sum = c.convert(self.cards)
-                        return "stay"
+                        if self.sum > 21 or self.sum == 21:
+                            response = "stay"
 
                     elif response == 'split':
-                        s_response = self.split(c)
-                        if s_response == 0:
-                            return "stay"
-                        elif s_response == 1:
-                            return "split_stay"
-                        elif s_response == 2:
-                            return "bust_twice"
+                        self.split(c)
+                        response = "stay"
 
-                while response != "stay" and len(self.cards) >= 2:
-                    response = str(input(
-                        "Would you like to hit, stay, or split? Type 'hit' or 'stay'.\n"))
+            while response != "stay" and len(self.cards) >= 2:
+                response = str(input(
+                    "Would you like to hit, stay, or split? Type 'hit' or 'stay'.\n"))
 
-                    if response == "hit":
-                        c.dealing_cards(self.cards, 1)
-                        self.sum = c.convert(self.cards)
-                        visible = self.cards.copy()
-                        visible = c.ace(visible)
-                        print(f'My cards: {visible} = {self.sum}')
+                if response == "hit":
+                    c.dealing_cards(self.cards, 1)
+                    self.sum = c.convert(self.cards)
+                    visible = self.cards.copy()
+                    visible = c.ace(visible)
+                    print(f'My cards: {visible} = {self.sum}')
 
-                        if self.sum > 21:
-                            return "bust"
-                        elif self.sum == 21:
-                            return "stay"
-
-                    elif response == "stay":
-                        self.sum = c.convert(self.cards)
-                        return "stay"
-
-            elif self.cards[0] != self.cards[1]:
-                while response != "stay":
-                    response = str(
-                        input("Would you like to hit or stay? Type 'hit' or 'stay'.\n"))
-
-                    if response == "hit":
-                        c.dealing_cards(self.cards, 1)
-                        self.sum = c.convert(self.cards)
-                        visible = self.cards.copy()
-                        visible = c.ace(visible)
-                        print(f'My cards: {visible} = {self.sum}')
-
-                        if self.sum > 21:
-                            return "bust"
-                        elif self.sum == 21:
-                            return "stay"
-
-                    elif response == "stay":
-                        self.sum = c.convert(self.cards)
-                        return "stay"
-
-        elif self.sum == 21 and len(self.cards) == 2:
-            return "blackjack"
+                    if self.sum > 21 or self.sum == 21:
+                        response = "stay"
 
     # split cards for player
     def split(self, c):
@@ -104,13 +65,19 @@ class Player:
                 c.dealing_cards(self.cards, 1)
                 self.sum = c.convert(self.cards)
                 print(f'My 1st set of cards: {self.cards} = {self.sum}')
-                if self.sum > 21:
+                if self.sum == 21 and len(self.cards) == 2:
+                    self.hand_2nd(c)
+                    response = "stay"
+
+                elif self.sum > 21:
                     print('Your 1st hand busted...\n')
-                    return self.hand_2nd(c)
+                    self.hand_2nd(c)
+                    response = "stay"
 
             elif response == "stay":
                 self.sum = c.convert(self.cards)
-                return self.hand_2nd(c)
+                self.hand_2nd(c)
+                response = "stay"
 
     # computes the 2nd hand
     def hand_2nd(self, c):
@@ -124,10 +91,10 @@ class Player:
                 self.sum2 = c.convert(self.cards2)
                 print(f'My 2nd set of cards: {self.cards2} = {self.sum2}\n')
                 if self.sum2 > 21:
-                    return "bust_twice"
+                    response_2 = "stay"
                 elif self.sum2 == 21:
-                    return "stay"
+                    response_2 = "stay"
 
             elif response_2 == "stay":
                 self.sum2 = c.convert(self.cards2)
-                return "stay"
+                response_2 = "stay"

@@ -35,7 +35,7 @@ if __name__ == "__main__":
 
         else:
             # no split
-            if 0 not in player.cards2:
+            if 0 in player.cards2:
                 if player.sum > dealer.sum:
                     print("You win!!!")
                 elif player.sum < dealer.sum:

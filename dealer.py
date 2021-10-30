@@ -19,6 +19,7 @@ class Dealer:
                     self.sum = 0
                     return "stay"
                 elif self.sum >= 17:
+                    print(f"Dealer's cards: {visible} = {self.sum}")
                     return "stay"
 
             if self.sum >= 17 and self.sum <= 21:

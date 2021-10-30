@@ -38,8 +38,10 @@ if __name__ == "__main__":
             if 0 in player.cards2:
                 if player.sum > dealer.sum:
                     print("You win!!!")
+
                 elif player.sum < dealer.sum:
                     print("You lose...")
+
                 elif player.sum == dealer.sum:
                     if player.sum == 0:
                         print("You lose..")

@@ -66,8 +66,10 @@ if __name__ == "__main__":
                 elif player.sum == dealer.sum:
                     if player.sum2 == dealer.sum:
                         print("Push! It's a tie for both hands!")
+
                     elif player.sum2 < dealer.sum:
                         print("You lost your 2nd hand...")
+
                     elif player.sum2 > dealer.sum:
                         print("Your 2nd hand won!!!")
 

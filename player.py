@@ -3,7 +3,7 @@ class Player:
         self.cards = []
         self.sum = 0
         # in case player splits
-        self.cards2 = [0, 0]
+        self.cards2 = [0]
         self.sum2 = 0
         self.split_count = 0
 
@@ -36,6 +36,7 @@ class Player:
                             response = "stay"
 
                     elif response == 'split':
+                        self.cards2.clear()
                         self.split(c)
                         response = "stay"
 

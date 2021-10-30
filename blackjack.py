@@ -41,7 +41,10 @@ if __name__ == "__main__":
                 elif player.sum < dealer.sum:
                     print("You lose...")
                 elif player.sum == dealer.sum:
-                    print("Push! It's a tie!")
+                    if player.sum == 0:
+                        print("You lose..")
+                    else:
+                        print("Push! It's a tie!")
 
             else:
                 if player.sum > dealer.sum:

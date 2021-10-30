@@ -41,7 +41,7 @@ class Player:
 
             while response != "stay" and len(self.cards) >= 2:
                 response = str(input(
-                    "Would you like to hit, stay, or split? Type 'hit' or 'stay'.\n"))
+                    "Would you like to hit or stay? Type 'hit' or 'stay'.\n"))
 
                 if response == "hit":
                     c.dealing_cards(self.cards, 1)

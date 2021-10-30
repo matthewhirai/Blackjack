@@ -5,7 +5,7 @@ class Dealer:
 
     def actions(self, c):
         if self.sum == 21 and len(self.cards) == 2:
-            print(f"Dealer's cards: {self.cards} = {self.sum}")
+            print(f"Dealer's cards: {c.print_hand(self.cards)} = {self.sum}")
             return "blackjack"
 
         elif self.sum != 21:
@@ -15,7 +15,8 @@ class Dealer:
                 self.sum = c.convert(self.cards)
                 visible = self.cards.copy()
                 visible = c.ace(visible)
-                print(f"Dealer's cards: {visible} = {self.sum}")
+                print(
+                    f"Dealer's cards: {c.print_hand(self.cards)} = {self.sum}")
                 if self.sum > 21:
                     self.sum = 0
                     return "stay"
@@ -23,5 +24,6 @@ class Dealer:
                     return "stay"
 
             if self.sum >= 17 and self.sum <= 21:
-                print(f"Dealer's cards: {self.cards} = {self.sum}")
+                print(
+                    f"Dealer's cards: {c.print_hand(self.cards)} = {self.sum}")
                 return "stay"

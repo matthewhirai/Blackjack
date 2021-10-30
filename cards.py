@@ -10,6 +10,13 @@ class Cards:
             self.deck[i] = self.deck[randIndex]
             self.deck[randIndex] = temp
 
+    def print_hand(self, card):
+        string = str(card[0])
+        for i in range(1, len(card)):
+            string += ", " + str(card[i])
+
+        return string
+
     def dealing_cards(self, cards, number):
         for i in range(number):
             if len(self.deck) == 0:

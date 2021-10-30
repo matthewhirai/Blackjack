@@ -8,7 +8,6 @@ class Player:
         self.split_count = 0
 
     # # what the player does
-
     def actions(self, c):
         if self.sum == 21 and len(self.cards) == 2:
             return "blackjack"
@@ -26,8 +25,8 @@ class Player:
                         self.sum = c.convert(self.cards)
                         visible = self.cards.copy()
                         visible = c.ace(visible)
-                        print(f'My cards: {visible} = {self.sum}')
-
+                        print(
+                            f'My cards: {c.print_hand(self.cards)} = {self.sum}')
                         if self.sum > 21:
                             # if hand busts, sum is set to 0
                             self.sum = 0
@@ -49,7 +48,8 @@ class Player:
                     self.sum = c.convert(self.cards)
                     visible = self.cards.copy()
                     visible = c.ace(visible)
-                    print(f'My cards: {visible} = {self.sum}')
+                    print(
+                        f'My cards: {c.print_hand(self.cards)} = {self.sum}')
 
                     if self.sum > 21:
                         self.sum = 0
@@ -61,8 +61,8 @@ class Player:
     def split(self, c):
         self.split_count += 1
         self.cards2.append(self.cards.pop())
-        print(f'My 1st set of cards: {self.cards}')
-        print(f'My 2nd set of cards: {self.cards2}\n')
+        print(f'My 1st set of cards: {c.print_hand(self.cards)}')
+        print(f'My 2nd set of cards: {c.print_hand(self.cards2)}\n')
 
         response = ""
         while response != "stay":
@@ -72,7 +72,8 @@ class Player:
             if response == "hit":
                 c.dealing_cards(self.cards, 1)
                 self.sum = c.convert(self.cards)
-                print(f'My 1st set of cards: {self.cards} = {self.sum}')
+                print(
+                    f'My 1st set of cards: {c.print_hand(self.cards)} = {self.sum}')
                 if self.sum == 21 and len(self.cards) == 2:
                     self.hand_2nd(c)
                     response = "stay"
@@ -98,7 +99,8 @@ class Player:
             if response_2 == "hit":
                 c.dealing_cards(self.cards2, 1)
                 self.sum2 = c.convert(self.cards2)
-                print(f'My 2nd set of cards: {self.cards2} = {self.sum2}\n')
+                print(
+                    f'My 2nd set of cards: {c.print_hand(self.cards2)} = {self.sum2}\n')
                 if self.sum2 > 21:
                     self.sum = 0
                     response_2 = "stay"

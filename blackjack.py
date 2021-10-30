@@ -12,7 +12,7 @@ if __name__ == "__main__":
         player.sum = c.convert(player.cards)
         visible = player.cards.copy()
         visible = c.ace(visible)
-        print(f'\nMy cards: {visible} = {player.sum}')
+        print(f'\nMy cards: {c.print_hand(visible)} = {player.sum}')
 
         c.dealing_cards(dealer.cards, 2)
         dealer.sum = c.convert(dealer.cards)
@@ -21,7 +21,7 @@ if __name__ == "__main__":
         invisible = c.ace(invisible)
         invisible.pop()
         invisible.append('*')
-        print(f"Dealer's cards: {invisible}")
+        print(f"Dealer's cards: {c.print_hand(invisible)}")
 
         player_condition = player.actions(c)
         dealer_condition = dealer.actions(c)

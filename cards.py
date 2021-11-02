@@ -6,9 +6,7 @@ class Cards:
         self.deck = ["A", 2, 3, 4, 5, 6, 7, 8, 9, 10, 'J', 'Q', "K"]*4
         for i in range(52):
             randIndex = random.randint(0, 51)
-            temp = self.deck[i]
-            self.deck[i] = self.deck[randIndex]
-            self.deck[randIndex] = temp
+            self.deck[i], self.deck[randIndex] = self.deck[randIndex], self.deck[i]
 
     def print_hand(self, card):
         string = str(card[0])
@@ -23,9 +21,7 @@ class Cards:
                 self.deck = ["A", 2, 3, 4, 5, 6, 7, 8, 9, 10, 'J', 'Q', "K"]*4
                 for i in range(52):
                     randIndex = random.randint(0, 51)
-                    temp = self.deck[i]
-                    self.deck[i] = self.deck[randIndex]
-                    self.deck[randIndex] = temp
+                    self.deck[i], self.deck[randIndex] = self.deck[randIndex], self.deck[i]
 
             cards.append(self.deck.pop(0))
 

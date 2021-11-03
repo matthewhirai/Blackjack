@@ -4,10 +4,11 @@ from dealer import Dealer
 
 if __name__ == "__main__":
     c = Cards()
+    player = Player()
+    dealer = Dealer()
     while True:
-        player = Player()
-        dealer = Dealer()
-
+        player.cards.clear()
+        dealer.cards.clear()
         c.dealing_cards(player.cards, 2)
         player.sum = c.convert(player.cards)
         visible = player.cards.copy()

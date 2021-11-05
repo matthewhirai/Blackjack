@@ -23,8 +23,6 @@ class Player:
                     if response == "hit":
                         c.dealing_cards(self.cards, 1)
                         self.sum = c.convert(self.cards)
-                        visible = self.cards.copy()
-                        visible = c.ace(visible)
                         print(
                             f'My cards: {c.print_hand(self.cards)} = {self.sum}')
                         if self.sum > 21:
@@ -46,8 +44,6 @@ class Player:
                 if response == "hit":
                     c.dealing_cards(self.cards, 1)
                     self.sum = c.convert(self.cards)
-                    visible = self.cards.copy()
-                    visible = c.ace(visible)
                     print(
                         f'My cards: {c.print_hand(self.cards)} = {self.sum}')
 

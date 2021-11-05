@@ -55,10 +55,3 @@ class Cards:
             else:
                 t += int(cards[i][:-1])
         return t
-
-    # turns 1 and 11 to 'A' to show user
-    def ace(self, cards):
-        for n, i in enumerate(cards):
-            if i == 1 or i == 11:
-                cards[n] = 'A'
-        return cards

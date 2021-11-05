@@ -11,15 +11,12 @@ if __name__ == "__main__":
         dealer.cards.clear()
         c.dealing_cards(player.cards, 2)
         player.sum = c.convert(player.cards)
-        visible = player.cards.copy()
-        visible = c.ace(visible)
-        print(f'\nMy cards: {c.print_hand(visible)} = {player.sum}')
+        print(f'\nMy cards: {c.print_hand(player.cards)} = {player.sum}')
 
         c.dealing_cards(dealer.cards, 2)
         dealer.sum = c.convert(dealer.cards)
         # need to make the last card of dealer's 'invisible' to the player
         invisible = dealer.cards[:]
-        invisible = c.ace(invisible)
         invisible.pop()
         invisible.append('*')
         print(f"Dealer's cards: {c.print_hand(invisible)}")

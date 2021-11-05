@@ -1,3 +1,3 @@
 # Blackjack-game
-Blackjack in Python
+Object-oriented version of my first project, Blackjack in python.
 

@@ -15,7 +15,7 @@ class Player:
         elif self.sum != 21:
             response = ''
             # when both cards are the same, the option for split comes up
-            if self.cards[0] == self.cards[1] and self.split_count != 1:
+            if self.cards[0][:-1] == self.cards[1][:-1] and self.split_count != 1:
                 while response != "stay" and len(self.cards) == 2:
                     response = str(input(
                         "Would you like to hit, stay, or split? Type 'hit', 'stay', or 'split'.\n"))

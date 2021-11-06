@@ -12,9 +12,9 @@ class Cards:
             self.deck[i], self.deck[randIndex] = self.deck[randIndex], self.deck[i]
 
     def print_hand(self, card):
-        string = str(card[0])
+        string = card[0]
         for i in range(1, len(card)):
-            string += ", " + str(card[i])
+            string += ", " + card[i]
 
         return string
 

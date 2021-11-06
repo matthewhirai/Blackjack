@@ -8,6 +8,7 @@ if __name__ == "__main__":
     dealer = Dealer()
     while True:
         player.cards.clear()
+        player.cards2 = [0]
         dealer.cards.clear()
         c.dealing_cards(player.cards, 2)
         player.sum = c.convert(player.cards)
